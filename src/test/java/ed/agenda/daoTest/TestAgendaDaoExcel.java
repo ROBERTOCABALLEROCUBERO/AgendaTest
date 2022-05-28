@@ -52,18 +52,45 @@ public class TestAgendaDaoExcel {
 
         dao.crearContactoPersona(CP1);
         dao.crearContactoPersona(CP2);
-        
+
         assertTrue(true);
 
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void borrarContactoPorPosicionTest() throws PosicionNoEncontradaException {
 
         AgendaDao dao = new AgendaDaoExcel();
         dao.borrarContactoPorPosicion(0);
         assertTrue(true);
 
+    }
+
+    @Test
+    public void Mostrartrab() {
+        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
+        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
+         AgendaDao dao = new AgendaDaoExcel();
+        ArrayList trabajadores = new ArrayList<ContactoPersona>();
+        trabajadores.add(CP1);
+        CE1.setTrabajadores(trabajadores);
+        dao.listarContactos();
+        assertEquals(trabajadores, CE1.getTrabajadores());
+        
+    }
+      @Test
+    public void Mostrartrabmal() {
+        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
+                ContactoPersona CP2 = new ContactoPersona("11221999", "Bill Gates", "356562883");
+        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
+        AgendaDao dao = new AgendaDaoExcel();
+        ArrayList trabajadores = new ArrayList<ContactoPersona>();
+        trabajadores.add(CP1);
+           trabajadores.add(CP2);
+        CE1.setTrabajadores(trabajadores);
+        dao.listarContactos();
+        assertNotEquals(trabajadores, CE1.getTrabajadores());
+        
     }
 
 }

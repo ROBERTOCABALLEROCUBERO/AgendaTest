@@ -19,38 +19,38 @@ import java.util.regex.Pattern;
 public class AgendaDaoArrayList implements AgendaDao {
 
     String nomre;
-<span class="fc" id="L22">    ArrayList&lt;Contacto&gt; contactos = new ArrayList&lt;Contacto&gt;();</span>
+<span class="nc" id="L22">    ArrayList&lt;Contacto&gt; contactos = new ArrayList&lt;Contacto&gt;();</span>
 
     public ArrayList&lt;Contacto&gt; getContactos() {
-<span class="fc" id="L25">        return contactos;</span>
+<span class="nc" id="L25">        return contactos;</span>
     }
 
     public void setContactos(ArrayList&lt;Contacto&gt; contactos) {
-<span class="fc" id="L29">        this.contactos = contactos;</span>
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L29">        this.contactos = contactos;</span>
+<span class="nc" id="L30">    }</span>
 
-<span class="fc" id="L32">    public AgendaDaoArrayList() {</span>
-<span class="fc" id="L33">    }</span>
+<span class="nc" id="L32">    public AgendaDaoArrayList() {</span>
+<span class="nc" id="L33">    }</span>
 
     @Override
     public boolean crearContactoPersona(ContactoPersona c) {
-<span class="fc" id="L37">        Pattern pat = Pattern.compile(&quot;[a-zA-Z]{3,15}&quot;);</span>
-<span class="fc" id="L38">        Matcher mat = pat.matcher(c.getNombre());</span>
+<span class="nc" id="L37">        Pattern pat = Pattern.compile(&quot;[a-zA-Z ]{3,15}&quot;);</span>
+<span class="nc" id="L38">        Matcher mat = pat.matcher(c.getNombre());</span>
 
-<span class="fc" id="L40">        Pattern pat2 = Pattern.compile(&quot;/\\+34 9[0-9]{1,2} [0-9]{7}/&quot;);</span>
-<span class="fc" id="L41">        Matcher mat2 = pat2.matcher(c.getNombre());</span>
+<span class="nc" id="L40">        Pattern pat2 = Pattern.compile(&quot;/\\+34 9[0-9]{1,2} [0-9]{7}/&quot;);</span>
+<span class="nc" id="L41">        Matcher mat2 = pat2.matcher(c.getNombre());</span>
 
-<span class="pc bpc" id="L43" title="3 of 4 branches missed.">        if (!mat.matches() &amp;&amp; !mat2.matches()) {</span>
+<span class="nc bnc" id="L43" title="All 4 branches missed.">        if (!mat.matches() &amp;&amp; !mat2.matches()) {</span>
 <span class="nc" id="L44">            return false;</span>
         }
 
-<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (int i = 0; i &lt; contactos.size(); i++) {</span>
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">            if (contactos.get(i).getNombre().equalsIgnoreCase(c.getNombre())) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        for (int i = 0; i &lt; contactos.size(); i++) {</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (contactos.get(i).getNombre().equalsIgnoreCase(c.getNombre())) {</span>
 <span class="nc" id="L49">                return false;</span>
             }
         }
-<span class="fc" id="L52">        contactos.add(c);</span>
-<span class="fc" id="L53">        return true;</span>
+<span class="nc" id="L52">        contactos.add(c);</span>
+<span class="nc" id="L53">        return true;</span>
     }
 
     @Override
@@ -87,7 +87,7 @@ public class AgendaDaoArrayList implements AgendaDao {
 
     @Override
     public Contacto obtenerContactoPorPosicion(int index) {
-<span class="fc" id="L90">        return contactos.get(index);</span>
+<span class="nc" id="L90">        return contactos.get(index);</span>
     }
 
     @Override
@@ -129,6 +129,16 @@ public class AgendaDaoArrayList implements AgendaDao {
 <span class="nc" id="L129">        }</span>
 <span class="nc" id="L130">    }</span>
     // }
+
+    @Override
+    public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp) {
+
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (ce.getTrabajadores()==null)</span>
+<span class="nc" id="L137">            ce.setTrabajadores(new ArrayList&lt;ContactoPersona&gt;());</span>
+        
+<span class="nc" id="L139">        ce.getTrabajadores().add(cp);</span>
+
+<span class="nc" id="L141">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -20,18 +20,18 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 
-<span class="fc" id="L23">public class AgendaDaoExcel implements AgendaDao {</span>
+<span class="nc" id="L23">public class AgendaDaoExcel implements AgendaDao {</span>
 
-<span class="fc" id="L25">	static String PROJECT_PATH = System.getProperty(&quot;user.dir&quot;);</span>
+<span class="nc" id="L25">	static String PROJECT_PATH = System.getProperty(&quot;user.dir&quot;);</span>
 
-<span class="fc" id="L27">	static String SRC_PATH = &quot;/resources/datos.xlsx&quot;;</span>
+<span class="nc" id="L27">	static String SRC_PATH = &quot;/resources/datos.xlsx&quot;;</span>
 
 	@Override
 	public boolean crearContactoPersona(ContactoPersona contacto) {
-<span class="fc" id="L31">		Pattern pat = Pattern.compile(&quot;[a-zA-Z]{5,15}&quot;);</span>
-<span class="fc" id="L32">		Matcher mat = pat.matcher(contacto.getNombre());</span>
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">		if (!mat.matches()) {</span>
-<span class="fc" id="L34">			return false;</span>
+<span class="nc" id="L31">		Pattern pat = Pattern.compile(&quot;[a-zA-Z]{5,15}&quot;);</span>
+<span class="nc" id="L32">		Matcher mat = pat.matcher(contacto.getNombre());</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">		if (!mat.matches()) {</span>
+<span class="nc" id="L34">			return false;</span>
 		}
 
 		// load the workbook
@@ -75,41 +75,41 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 	@Override
 	public boolean crearContactoEmpresa(ContactoEmpresa contacto) {
-<span class="fc" id="L78">		Pattern pat = Pattern.compile(&quot;[a-zA-Z]{3,20}&quot;);</span>
-<span class="fc" id="L79">		Matcher mat = pat.matcher(contacto.getNombre());</span>
+<span class="nc" id="L78">		Pattern pat = Pattern.compile(&quot;[a-zA-Z]{3,20}&quot;);</span>
+<span class="nc" id="L79">		Matcher mat = pat.matcher(contacto.getNombre());</span>
 		
-<span class="fc" id="L81">		Pattern pat2 = Pattern.compile(&quot;^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@&quot;</span>
+<span class="nc" id="L81">		Pattern pat2 = Pattern.compile(&quot;^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@&quot;</span>
                 + &quot;[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$&quot;);
-<span class="fc" id="L83">		Matcher mat2 = pat.matcher(contacto.getPagweb());</span>
-<span class="pc bpc" id="L84" title="3 of 4 branches missed.">		if (!mat.matches() &amp;&amp; !mat2.matches()) {</span>
+<span class="nc" id="L83">		Matcher mat2 = pat.matcher(contacto.getPagweb());</span>
+<span class="nc bnc" id="L84" title="All 4 branches missed.">		if (!mat.matches() &amp;&amp; !mat2.matches()) {</span>
 <span class="nc" id="L85">			return false;</span>
 		}
 		InputStream inp;
 		try {
-<span class="fc" id="L89">			inp = new FileInputStream(PROJECT_PATH + SRC_PATH);</span>
+<span class="nc" id="L89">			inp = new FileInputStream(PROJECT_PATH + SRC_PATH);</span>
 
-<span class="fc" id="L91">			Workbook wb = WorkbookFactory.create(inp);</span>
-<span class="fc" id="L92">			inp.close();</span>
+<span class="nc" id="L91">			Workbook wb = WorkbookFactory.create(inp);</span>
+<span class="nc" id="L92">			inp.close();</span>
 
 			// make some changes
-<span class="fc" id="L95">			Sheet sh = wb.getSheetAt(0);</span>
-<span class="fc" id="L96">			Row r = sh.createRow(sh.getPhysicalNumberOfRows());</span>
-<span class="fc" id="L97">			Cell c = r.createCell(0);</span>
-<span class="fc" id="L98">			c.setCellValue(&quot;empresa&quot;);</span>
-<span class="fc" id="L99">			c = r.createCell(1);</span>
-<span class="fc" id="L100">			c.setCellValue(contacto.getNombre());</span>
-<span class="fc" id="L101">			c = r.createCell(2);</span>
-<span class="fc" id="L102">			c.setCellValue(contacto.getTelefono());</span>
-<span class="fc" id="L103">			c = r.createCell(3);</span>
-<span class="fc" id="L104">			c.setCellValue(contacto.getId());</span>
-<span class="fc" id="L105">			c = r.createCell(4);</span>
-<span class="fc" id="L106">			c.setCellValue(contacto.getPagweb());</span>
+<span class="nc" id="L95">			Sheet sh = wb.getSheetAt(0);</span>
+<span class="nc" id="L96">			Row r = sh.createRow(sh.getPhysicalNumberOfRows());</span>
+<span class="nc" id="L97">			Cell c = r.createCell(0);</span>
+<span class="nc" id="L98">			c.setCellValue(&quot;empresa&quot;);</span>
+<span class="nc" id="L99">			c = r.createCell(1);</span>
+<span class="nc" id="L100">			c.setCellValue(contacto.getNombre());</span>
+<span class="nc" id="L101">			c = r.createCell(2);</span>
+<span class="nc" id="L102">			c.setCellValue(contacto.getTelefono());</span>
+<span class="nc" id="L103">			c = r.createCell(3);</span>
+<span class="nc" id="L104">			c.setCellValue(contacto.getId());</span>
+<span class="nc" id="L105">			c = r.createCell(4);</span>
+<span class="nc" id="L106">			c.setCellValue(contacto.getPagweb());</span>
 
 			// overwrite the workbook with changed workbook
-<span class="fc" id="L109">			FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + SRC_PATH);</span>
-<span class="fc" id="L110">			wb.write(fileOut);</span>
-<span class="fc" id="L111">			fileOut.close();</span>
-<span class="fc" id="L112">			wb.close();</span>
+<span class="nc" id="L109">			FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + SRC_PATH);</span>
+<span class="nc" id="L110">			wb.write(fileOut);</span>
+<span class="nc" id="L111">			fileOut.close();</span>
+<span class="nc" id="L112">			wb.close();</span>
 <span class="nc" id="L113">		} catch (FileNotFoundException e) {</span>
 <span class="nc" id="L114">			e.printStackTrace();</span>
 <span class="nc" id="L115">			return false;</span>
@@ -117,38 +117,38 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 <span class="nc" id="L117">		} catch (IOException e) {</span>
 <span class="nc" id="L118">			e.printStackTrace();</span>
 <span class="nc" id="L119">			return false;</span>
-<span class="fc" id="L120">		}</span>
+<span class="nc" id="L120">		}</span>
 
-<span class="fc" id="L122">		return true;</span>
+<span class="nc" id="L122">		return true;</span>
 	}
 
 	@Override
 	public boolean borrarContactoPorPosicion(int rowIndex) {
 		InputStream inp;
 		try {
-<span class="fc" id="L129">			inp = new FileInputStream(PROJECT_PATH + SRC_PATH);</span>
+<span class="nc" id="L129">			inp = new FileInputStream(PROJECT_PATH + SRC_PATH);</span>
 
-<span class="fc" id="L131">			Workbook wb = WorkbookFactory.create(inp);</span>
-<span class="fc" id="L132">			inp.close();</span>
+<span class="nc" id="L131">			Workbook wb = WorkbookFactory.create(inp);</span>
+<span class="nc" id="L132">			inp.close();</span>
 
 			// make some changes
-<span class="fc" id="L135">			Sheet sheet = wb.getSheetAt(0);</span>
+<span class="nc" id="L135">			Sheet sheet = wb.getSheetAt(0);</span>
 
-<span class="fc" id="L137">			int lastRowNum = sheet.getLastRowNum();</span>
+<span class="nc" id="L137">			int lastRowNum = sheet.getLastRowNum();</span>
 
 			
-<span class="fc" id="L140">			int filasSubir = rowIndex -lastRowNum;</span>
-<span class="pc bpc" id="L141" title="2 of 4 branches missed.">			if (rowIndex &gt;= 0 &amp;&amp; rowIndex &lt; lastRowNum) {</span>
+<span class="nc" id="L140">			int filasSubir = rowIndex -lastRowNum;</span>
+<span class="nc bnc" id="L141" title="All 4 branches missed.">			if (rowIndex &gt;= 0 &amp;&amp; rowIndex &lt; lastRowNum) {</span>
 				
 				
-<span class="fc" id="L144">				sheet.removeRow(sheet.getRow(rowIndex));</span>
+<span class="nc" id="L144">				sheet.removeRow(sheet.getRow(rowIndex));</span>
 			}
 
 			// overwrite the workbook with changed workbook
-<span class="fc" id="L148">			FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + SRC_PATH);</span>
-<span class="fc" id="L149">			wb.write(fileOut);</span>
-<span class="fc" id="L150">			fileOut.close();</span>
-<span class="fc" id="L151">			wb.close();</span>
+<span class="nc" id="L148">			FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + SRC_PATH);</span>
+<span class="nc" id="L149">			wb.write(fileOut);</span>
+<span class="nc" id="L150">			fileOut.close();</span>
+<span class="nc" id="L151">			wb.close();</span>
 <span class="nc" id="L152">		} catch (FileNotFoundException e) {</span>
 <span class="nc" id="L153">			e.printStackTrace();</span>
 <span class="nc" id="L154">			return false;</span>
@@ -156,9 +156,9 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 <span class="nc" id="L156">		} catch (IOException e) {</span>
 <span class="nc" id="L157">			e.printStackTrace();</span>
 <span class="nc" id="L158">			return false;</span>
-<span class="fc" id="L159">		}</span>
-<span class="fc" id="L160">		shift();</span>
-<span class="fc" id="L161">		return true;</span>
+<span class="nc" id="L159">		}</span>
+<span class="nc" id="L160">		shift();</span>
+<span class="nc" id="L161">		return true;</span>
 	}
 
 	@Override
@@ -177,66 +177,66 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
     public static void shift(){
         int firstColumn;
         int endColumn;
-<span class="fc" id="L180">        boolean isRowEmpty = true;</span>
+<span class="nc" id="L180">        boolean isRowEmpty = true;</span>
         try{
-<span class="fc" id="L182">            FileInputStream is=new FileInputStream(PROJECT_PATH + SRC_PATH);</span>
+<span class="nc" id="L182">            FileInputStream is=new FileInputStream(PROJECT_PATH + SRC_PATH);</span>
 
-<span class="fc" id="L184">			Workbook wb = WorkbookFactory.create(is);</span>
-<span class="fc" id="L185">			Sheet sheet = wb.getSheetAt(0);</span>
+<span class="nc" id="L184">			Workbook wb = WorkbookFactory.create(is);</span>
+<span class="nc" id="L185">			Sheet sheet = wb.getSheetAt(0);</span>
             //sheet.setDisplayGridlines(false);
 
             //block to set column bounds
-<span class="fc" id="L189">            Iterator&lt;Row&gt; iter = sheet.rowIterator();</span>
-<span class="pc bpc" id="L190" title="1 of 2 branches missed.">            firstColumn = (iter.hasNext() ? Integer.MAX_VALUE : 0);</span>
-<span class="fc" id="L191">            endColumn = 0;</span>
-<span class="fc bfc" id="L192" title="All 2 branches covered.">            while (iter.hasNext()) {</span>
-<span class="fc" id="L193">                Row row = iter.next();</span>
-<span class="fc" id="L194">                short firstCell = row.getFirstCellNum();</span>
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">                if (firstCell &gt;= 0) {</span>
-<span class="fc" id="L196">                    firstColumn = Math.min(firstColumn, firstCell);</span>
-<span class="fc" id="L197">                    endColumn = Math.max(endColumn, row.getLastCellNum());</span>
+<span class="nc" id="L189">            Iterator&lt;Row&gt; iter = sheet.rowIterator();</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">            firstColumn = (iter.hasNext() ? Integer.MAX_VALUE : 0);</span>
+<span class="nc" id="L191">            endColumn = 0;</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            while (iter.hasNext()) {</span>
+<span class="nc" id="L193">                Row row = iter.next();</span>
+<span class="nc" id="L194">                short firstCell = row.getFirstCellNum();</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                if (firstCell &gt;= 0) {</span>
+<span class="nc" id="L196">                    firstColumn = Math.min(firstColumn, firstCell);</span>
+<span class="nc" id="L197">                    endColumn = Math.max(endColumn, row.getLastCellNum());</span>
                 }
-<span class="fc" id="L199">            }</span>
+<span class="nc" id="L199">            }</span>
 
             // main logic block
-<span class="fc bfc" id="L202" title="All 2 branches covered.">            for (int i = 0; i&lt; sheet.getLastRowNum(); i++) {</span>
-<span class="fc bfc" id="L203" title="All 2 branches covered.">                if (sheet.getRow(i) != null) {</span>
-<span class="fc" id="L204">                    isRowEmpty = true;</span>
-<span class="fc" id="L205">                    Row row = sheet.getRow(i);</span>
-<span class="pc bpc" id="L206" title="1 of 2 branches missed.">                    for (int j = firstColumn; j &lt; endColumn; j++) {</span>
-<span class="pc bpc" id="L207" title="2 of 4 branches missed.">                        if (j &gt;= row.getFirstCellNum() &amp;&amp; j &lt; row.getLastCellNum()) {</span>
-<span class="fc" id="L208">                            Cell cell = row.getCell(j);</span>
-<span class="pc bpc" id="L209" title="1 of 2 branches missed.">                            if (cell != null) {</span>
-<span class="pc bpc" id="L210" title="1 of 2 branches missed.">                                if (!cell.getStringCellValue().equals(&quot;&quot;)) {</span>
-<span class="fc" id="L211">                                    isRowEmpty = false;</span>
-<span class="fc" id="L212">                                    break;</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">            for (int i = 0; i&lt; sheet.getLastRowNum(); i++) {</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">                if (sheet.getRow(i) != null) {</span>
+<span class="nc" id="L204">                    isRowEmpty = true;</span>
+<span class="nc" id="L205">                    Row row = sheet.getRow(i);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                    for (int j = firstColumn; j &lt; endColumn; j++) {</span>
+<span class="nc bnc" id="L207" title="All 4 branches missed.">                        if (j &gt;= row.getFirstCellNum() &amp;&amp; j &lt; row.getLastCellNum()) {</span>
+<span class="nc" id="L208">                            Cell cell = row.getCell(j);</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">                            if (cell != null) {</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">                                if (!cell.getStringCellValue().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L211">                                    isRowEmpty = false;</span>
+<span class="nc" id="L212">                                    break;</span>
                                 }
                             }
                         }
                     }
                     //if empty
-<span class="pc bpc" id="L218" title="1 of 2 branches missed.">                    if (isRowEmpty) {</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">                    if (isRowEmpty) {</span>
 <span class="nc" id="L219">                        System.out.println(&quot;Found empty row on: &quot; + row.getRowNum());</span>
 <span class="nc" id="L220">                        sheet.shiftRows(row.getRowNum() + 1, sheet.getLastRowNum(), -1);</span>
 <span class="nc" id="L221">                        i--;</span>
                     }
-<span class="fc" id="L223">                }</span>
+<span class="nc" id="L223">                }</span>
                 // if row is null
                 else{
-<span class="fc" id="L226">                    sheet.shiftRows(i + 1, sheet.getLastRowNum(), -1);</span>
-<span class="fc" id="L227">                    i--;</span>
+<span class="nc" id="L226">                    sheet.shiftRows(i + 1, sheet.getLastRowNum(), -1);</span>
+<span class="nc" id="L227">                    i--;</span>
                 }
             }
             //Writing output to the same file.
-<span class="fc" id="L231">            FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + SRC_PATH);</span>
-<span class="fc" id="L232">            wb.write(fileOut);</span>
-<span class="fc" id="L233">            fileOut.close();</span>
-<span class="fc" id="L234">            System.out.println(&quot;Successfully wrote the content in the file&quot;);</span>
+<span class="nc" id="L231">            FileOutputStream fileOut = new FileOutputStream(PROJECT_PATH + SRC_PATH);</span>
+<span class="nc" id="L232">            wb.write(fileOut);</span>
+<span class="nc" id="L233">            fileOut.close();</span>
+<span class="nc" id="L234">            System.out.println(&quot;Successfully wrote the content in the file&quot;);</span>
         }
 <span class="nc" id="L236">        catch(Exception e){</span>
 <span class="nc" id="L237">            e.printStackTrace();</span>
-<span class="fc" id="L238">        }</span>
-<span class="fc" id="L239">    }</span>
+<span class="nc" id="L238">        }</span>
+<span class="nc" id="L239">    }</span>
 
     @Override
     public void listarContactos() {
@@ -251,6 +251,11 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
     @Override
     public void mostrarTrabajadoresEmpresa(String nombre) throws ContactoNoEncontradoException {
 <span class="nc" id="L253">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp) {
+<span class="nc" id="L258">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 	
 }
